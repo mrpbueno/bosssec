@@ -1,73 +1,72 @@
-# Módulo Chefe-Secretária para FreePBX
-Um módulo para FreePBX 14+ que implementa um fluxo de chamadas inteligente do tipo "Chefe-Secretária". As chamadas destinadas a um "Chefe" são primeiro interceptadas e direcionadas a uma "Secretária", que atua como um portão de entrada, com a flexibilidade de uma lista de permissões (whitelist) para acesso direto.
+# Boss-Secretary Module for FreePBX
+A module for FreePBX 14+ that implements an intelligent "Boss-Secretary" call flow. Calls intended for a "Boss" are first intercepted and directed to a "Secretary," who acts as a gatekeeper, with the flexibility of a whitelist for direct access.
 
-Este projeto foi desenvolvido seguindo as melhores práticas para a criação de módulos no FreePBX, utilizando a arquitetura BMO (Big Module Object)  e sendo o menos invasivo possível.
+This project was developed following best practices for module creation in FreePBX, using the BMO (Big Module Object) architecture and being as non-invasive as possible.
 
-## Funcionalidades Principais
-Roteamento Inteligente: Desvia chamadas destinadas a um ramal "Chefe" para um ramal "Secretária" designado.
+## Key Features
+Intelligent Routing: Forwards calls intended for a "Boss" extension to a designated "Secretary" extension.
 
-Whitelist de Acesso Direto: Configure uma lista de números (internos ou externos) que podem contornar a secretária e ligar diretamente para o chefe.
+Whitelist for Direct Access: Configure a list of numbers (internal or external) that can bypass the secretary and call the boss directly.
 
-Gerenciamento de Múltiplos Pares: A interface permite configurar múltiplas regras de Chefe-Secretária, cada uma com sua própria whitelist.
+Multi-Pair Management: The interface allows for the configuration of multiple Boss-Secretary rules, each with its own whitelist.
 
-Interface Gráfica Integrada: Todas as configurações são gerenciadas através de uma nova página no menu "Applications" do FreePBX, sem a necessidade de editar arquivos de configuração manualmente.
+Integrated Graphical Interface: All settings are managed through a new page in the "Applications" menu of FreePBX, without the need to manually edit configuration files.
 
-Seleção de Ramais Amigável: Utiliza a biblioteca Select2 para facilitar a busca e seleção dos ramais do chefe e da secretária, minimizando erros.
+User-Friendly Extension Selection: Uses the Select2 library to facilitate searching and selecting the boss's and secretary's extensions, minimizing errors.
 
-Notificações de Feedback: Exibe mensagens de sucesso ou erro ("toast notifications") após cada ação, melhorando a experiência do usuário.
+Feedback Notifications: Displays success or error messages ("toast notifications") after each action, improving the user experience.
 
-Integração Segura com o Dialplan: O módulo injeta sua lógica de forma segura no Dialplan do Asterisk, sem sobrescrever contextos existentes, garantindo compatibilidade e estabilidade.
+Secure Dialplan Integration: The module safely injects its logic into the Asterisk Dialplan without overwriting existing contexts, ensuring compatibility and stability.
 
-## Como Funciona
-O módulo utiliza um Dialplan Hook para se integrar ao FreePBX. Em vez de criar contextos que possam entrar em conflito com a lógica padrão, ele usa a função $ext->splice()  para injetar um comando Goto no início do contexto ext-local do ramal do chefe.
+## How It Works
+The module uses a Dialplan Hook to integrate with FreePBX. Instead of creating contexts that could conflict with the standard logic, it uses the $ext->splice() function to inject a Goto command at the beginning of the ext-local context for the boss's extension.
 
-Isso desvia a chamada para uma sub-rotina personalizada que:
+This diverts the call to a custom subroutine that:
 
-Verifica o CallerID do autor da chamada contra a whitelist.
+Checks the caller's CallerID against the whitelist.
 
-Se o número for permitido, a chamada é devolvida ao fluxo padrão do FreePBX (ext-local), em uma prioridade que evita loops, para ser completada normalmente.
+If the number is allowed, the call is returned to the standard FreePBX flow (ext-local), at a priority that prevents loops, to be completed normally.
 
-Se o número não for permitido, a chamada é direcionada para o fluxo padrão do ramal da secretária.
+If the number is not allowed, the call is directed to the standard flow of the secretary's extension.
 
-Essa abordagem garante que o módulo apenas gerencie o desvio inicial, deixando todo o resto do processamento da chamada (incluindo Siga-me, correio de voz, etc.) para o próprio FreePBX.
+This approach ensures that the module only manages the initial diversion, leaving all other call processing (including Follow Me, voicemail, etc.) to FreePBX itself.
 
-## Pré-requisitos
+## Prerequisites
+FreePBX 14 or higher.
 
-FreePBX 14 ou superior.
+PHP 5.6 or higher.
 
-PHP 5.6 ou superior.
+## Installation
+Download the latest version of the module from https://github.com/mrpbueno/bosssec/releases
 
-## Instalação
-Baixe a última versão do módulo em https://github.com/mrpbueno/bosssec/releases
+Navigate to Admin > Module Admin.
 
-Navegue até Administrador > Admin Módulos
+Click on Upload Modules and upload the module's zip file.
 
-Clique em Carregar Módulos e faça o upload do arquivo zip do módulo
+Return to the module list and install the Boss-Secretary module.
 
-Volte a lista de módulos e faça a instalação do módulo Chefe Secretária
+## Usage and Configuration
+After installation, the module will be available in the FreePBX menu.
 
-## Uso e Configuração
-Após a instalação, o módulo estará disponível no menu do FreePBX.
+Navigate to Applications > Boss-Secretary.
 
-Navegue até Applications > Chefe Secretaria.
+You will see a list of all existing rules. To add a new one, click on "Add".
 
-Você verá uma lista de todas as regras existentes. Para adicionar uma nova, clique em "Adicionar".
+Fill out the form:
 
-Preencha o formulário:
+Boss's Name: A descriptive name for the rule (e.g., "Financial Director").
 
-Nome do Chefe: Um nome descritivo para a regra (ex: "Diretor Financeiro").
+Boss's Extension: Select the boss's extension from the list.
 
-Ramal do Chefe: Selecione o ramal do chefe na lista.
+Secretary's Extension: Select the secretary's extension where calls will be forwarded.
 
-Ramal da Secretária: Selecione o ramal da secretária para onde as chamadas serão desviadas.
+Whitelist Numbers: Add the numbers that will have direct access. You can separate them by space, comma, or line break.
 
-Whitelist de Números: Adicione os números que terão acesso direto. Você pode separar por espaço, vírgula ou quebra de linha.
+Rule Enabled: Set whether the rule is active or not.
 
-Regra Ativada: Defina se a regra está ativa ou não.
+Click "Submit" to save.
 
-Clique em "Enviar" para salvar.
+Important: After saving any changes, the red "Apply Config" button will appear at the top of the page. Click it so that your new dialing rules are applied in Asterisk.
 
-Importante: Após salvar qualquer alteração, o botão vermelho "Apply Config" aparecerá no topo da página. Clique nele para que as suas novas regras de discagem sejam aplicadas no Asterisk.
-
-## Licença
-Este projeto é licenciado sob a licença GPLv3.
+## License
+This project is licensed under the GPLv3 license.
