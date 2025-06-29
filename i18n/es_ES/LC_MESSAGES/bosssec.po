@@ -1,0 +1,161 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Boss-Secretary\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-29 18:57-0300\n"
+"PO-Revision-Date: 2025-06-29 19:27-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-KeywordsList: _(\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Bosssec.class.php:98
+msgid "Rule added successfully!"
+msgstr "¡Regla añadida correctamente!"
+
+#: Bosssec.class.php:98 Bosssec.class.php:105 Bosssec.class.php:112
+msgid "Success"
+msgstr "Éxito"
+
+#: Bosssec.class.php:105
+msgid "Rule successfully updated!"
+msgstr "¡Regla actualizada correctamente!"
+
+#: Bosssec.class.php:112
+msgid "Rule successfully deleted!"
+msgstr "¡Regla eliminada correctamente!"
+
+#: Bosssec.class.php:118
+msgid "An error occurred while processing the request."
+msgstr "Ocurrió un error al procesar la solicitud."
+
+#: Bosssec.class.php:118
+msgid "Error"
+msgstr "Error"
+
+#: Bosssec.class.php:172 views/grid.php:34
+msgid "Delete"
+msgstr "Eliminar"
+
+#: Bosssec.class.php:173
+msgid "Reset"
+msgstr "Restablecer"
+
+#: Bosssec.class.php:174
+msgid "Submit"
+msgstr "Enviar"
+
+#: Bosssec.class.php:231
+msgid "Error adding Boss-Secretary rule: "
+msgstr "Error al añadir la regla Jefe-Secretaria: "
+
+#: Bosssec.class.php:256
+msgid "Error updating Boss-Secretary rule: "
+msgstr "Error al actualizar la regla Jefe-Secretaria: "
+
+#: Bosssec.class.php:275
+msgid "Error deleting Boss-Secretary rule: "
+msgstr "Error al eliminar la regla Jefe-Secretaria: "
+
+#: Bosssec.class.php:355
+msgid "Edit Boss-Secretary Rule"
+msgstr "Editar Regla Jefe-Secretaria"
+
+#: Bosssec.class.php:358
+msgid "Add New Boss-Secretary Rule"
+msgstr "Añadir Nueva Regla Jefe-Secretaria"
+
+#: Bosssec.class.php:367
+msgid "Boss-Secretary Rule List"
+msgstr "Lista de Reglas Jefe-Secretaria"
+
+#: views/default.php:7
+msgid "Boss-Secretary"
+msgstr "Jefe-Secretaria"
+
+#: views/form.php:11 views/grid.php:22
+msgid "Boss's Name"
+msgstr "Nombre del Jefe"
+
+#: views/form.php:21
+msgid "A descriptive name for the boss."
+msgstr "Un nombre descriptivo para el jefe."
+
+#: views/form.php:29 views/grid.php:23
+msgid "Boss's Extension"
+msgstr "Extensión del Jefe"
+
+#: views/form.php:34 views/form.php:61
+msgid "Select an extension"
+msgstr "Seleccione una extensión"
+
+#: views/form.php:48
+msgid "The boss's extension whose calls will be forwarded to the secretary."
+msgstr "La extensión del jefe cuyas llamadas se desviarán a la secretaria."
+
+#: views/form.php:56 views/grid.php:24
+msgid "Secretary's Extension"
+msgstr "Extensión de la Secretaria"
+
+#: views/form.php:75
+msgid "The extension where calls will be forwarded."
+msgstr "La extensión a la que se desviarán las llamadas."
+
+#: views/form.php:83
+msgid "Whitelist Numbers"
+msgstr "Números en Lista Blanca"
+
+#: views/form.php:93
+msgid "Numbers that can call the boss directly. Add one number per line."
+msgstr "Números que pueden llamar directamente al jefe. Añada un número por línea."
+
+#: views/form.php:101
+msgid "Rule Enabled"
+msgstr "Regla Habilitada"
+
+#: views/form.php:107
+msgid "Yes"
+msgstr "Sí"
+
+#: views/form.php:109
+msgid "No"
+msgstr "No"
+
+#: views/form.php:116
+msgid "Disable the rule without deleting it."
+msgstr "Deshabilitar la regla sin tener que eliminarla."
+
+#: views/grid.php:4
+msgid "Add Boss-Secretary Rule"
+msgstr "Añadir Regla Jefe-Secretaria"
+
+#: views/grid.php:7
+msgid "Add"
+msgstr "Añadir"
+
+#: views/grid.php:25
+msgid "Status"
+msgstr "Estado"
+
+#: views/grid.php:26
+msgid "Actions"
+msgstr "Acciones"
+
+#: views/grid.php:33
+msgid "Edit"
+msgstr "Editar"
+
+#: views/grid.php:35
+msgid "Activated"
+msgstr "Activado"
+
+#: views/grid.php:36
+msgid "Deactivated"
+msgstr "Desactivado"
