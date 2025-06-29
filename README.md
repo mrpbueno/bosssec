@@ -38,7 +38,7 @@ FreePBX 14 ou superior.
 PHP 5.6 ou superior.
 
 ## Instalação
-Baixe a última versão do módulo em https://github.com/mrpbueno/chefesecretaria/releases
+Baixe a última versão do módulo em https://github.com/mrpbueno/bosssec/releases
 
 Navegue até Administrador > Admin Módulos
 
