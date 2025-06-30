@@ -2,11 +2,11 @@
     <rawname>bosssec</rawname>
     <repo>unsupported</repo>
     <name>Boss-Secretary</name>
-    <version>14.0.1</version>
+    <version>14.0.2</version>
     <category>Applications</category>
     <publisher>mrpbueno</publisher>
     <info>https://github.com/mrpbueno/bosssec</info>
-    <licence>GPLv3+</licence>
+    <license>GPLv3+</license>
     <licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
     <database>
         <table name="bosssec_config">
