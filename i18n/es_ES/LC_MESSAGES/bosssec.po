@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Boss-Secretary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 18:57-0300\n"
-"PO-Revision-Date: 2025-06-29 19:27-0300\n"
+"POT-Creation-Date: 2025-06-30 20:29-0300\n"
+"PO-Revision-Date: 2025-06-30 20:29-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -13,66 +13,76 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-KeywordsList: _(\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: i18n/es_ES\n"
+"X-Poedit-SearchPath-1: .\n"
 
-#: Bosssec.class.php:98
+#: Bosssec.class.php:91
+msgid "The selected boss extension is already in use by another rule."
+msgstr "La extensión de jefe seleccionada ya está siendo utilizada por otra regla."
+
+#: Bosssec.class.php:91
+msgid "Duplicate Boss"
+msgstr "Jefe duplicado"
+
+#: Bosssec.class.php:104
 msgid "Rule added successfully!"
 msgstr "¡Regla añadida correctamente!"
 
-#: Bosssec.class.php:98 Bosssec.class.php:105 Bosssec.class.php:112
+#: Bosssec.class.php:104 Bosssec.class.php:111 Bosssec.class.php:118
 msgid "Success"
 msgstr "Éxito"
 
-#: Bosssec.class.php:105
+#: Bosssec.class.php:111
 msgid "Rule successfully updated!"
 msgstr "¡Regla actualizada correctamente!"
 
-#: Bosssec.class.php:112
+#: Bosssec.class.php:118
 msgid "Rule successfully deleted!"
 msgstr "¡Regla eliminada correctamente!"
 
-#: Bosssec.class.php:118
+#: Bosssec.class.php:124
 msgid "An error occurred while processing the request."
 msgstr "Ocurrió un error al procesar la solicitud."
 
-#: Bosssec.class.php:118
+#: Bosssec.class.php:124
 msgid "Error"
 msgstr "Error"
 
-#: Bosssec.class.php:172 views/grid.php:34
+#: Bosssec.class.php:178 views/grid.php:34
 msgid "Delete"
 msgstr "Eliminar"
 
-#: Bosssec.class.php:173
+#: Bosssec.class.php:179
 msgid "Reset"
 msgstr "Restablecer"
 
-#: Bosssec.class.php:174
+#: Bosssec.class.php:180
 msgid "Submit"
 msgstr "Enviar"
 
-#: Bosssec.class.php:231
+#: Bosssec.class.php:237
 msgid "Error adding Boss-Secretary rule: "
 msgstr "Error al añadir la regla Jefe-Secretaria: "
 
-#: Bosssec.class.php:256
+#: Bosssec.class.php:262
 msgid "Error updating Boss-Secretary rule: "
 msgstr "Error al actualizar la regla Jefe-Secretaria: "
 
-#: Bosssec.class.php:275
+#: Bosssec.class.php:281
 msgid "Error deleting Boss-Secretary rule: "
 msgstr "Error al eliminar la regla Jefe-Secretaria: "
 
-#: Bosssec.class.php:355
+#: Bosssec.class.php:383
 msgid "Edit Boss-Secretary Rule"
 msgstr "Editar Regla Jefe-Secretaria"
 
-#: Bosssec.class.php:358
+#: Bosssec.class.php:386
 msgid "Add New Boss-Secretary Rule"
 msgstr "Añadir Nueva Regla Jefe-Secretaria"
 
-#: Bosssec.class.php:367
+#: Bosssec.class.php:395
 msgid "Boss-Secretary Rule List"
 msgstr "Lista de Reglas Jefe-Secretaria"
 

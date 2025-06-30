@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Boss-Secretary\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 18:57-0300\n"
+"POT-Creation-Date: 2025-06-30 20:26-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,63 +15,71 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Bosssec.class.php:98
+#: Bosssec.class.php:91
+msgid "The selected boss extension is already in use by another rule."
+msgstr ""
+
+#: Bosssec.class.php:91
+msgid "Duplicate Boss"
+msgstr ""
+
+#: Bosssec.class.php:104
 msgid "Rule added successfully!"
 msgstr ""
 
-#: Bosssec.class.php:98 Bosssec.class.php:105 Bosssec.class.php:112
+#: Bosssec.class.php:104 Bosssec.class.php:111 Bosssec.class.php:118
 msgid "Success"
 msgstr ""
 
-#: Bosssec.class.php:105
+#: Bosssec.class.php:111
 msgid "Rule successfully updated!"
 msgstr ""
 
-#: Bosssec.class.php:112
+#: Bosssec.class.php:118
 msgid "Rule successfully deleted!"
 msgstr ""
 
-#: Bosssec.class.php:118
+#: Bosssec.class.php:124
 msgid "An error occurred while processing the request."
 msgstr ""
 
-#: Bosssec.class.php:118
+#: Bosssec.class.php:124
 msgid "Error"
 msgstr ""
 
-#: Bosssec.class.php:172 views/grid.php:34
+#: Bosssec.class.php:178 views/grid.php:34
 msgid "Delete"
 msgstr ""
 
-#: Bosssec.class.php:173
+#: Bosssec.class.php:179
 msgid "Reset"
 msgstr ""
 
-#: Bosssec.class.php:174
+#: Bosssec.class.php:180
 msgid "Submit"
 msgstr ""
 
-#: Bosssec.class.php:231
+#: Bosssec.class.php:237
 msgid "Error adding Boss-Secretary rule: "
 msgstr ""
 
-#: Bosssec.class.php:256
+#: Bosssec.class.php:262
 msgid "Error updating Boss-Secretary rule: "
 msgstr ""
 
-#: Bosssec.class.php:275
+#: Bosssec.class.php:281
 msgid "Error deleting Boss-Secretary rule: "
 msgstr ""
 
-#: Bosssec.class.php:355
+#: Bosssec.class.php:383
 msgid "Edit Boss-Secretary Rule"
 msgstr ""
 
-#: Bosssec.class.php:358
+#: Bosssec.class.php:386
 msgid "Add New Boss-Secretary Rule"
 msgstr ""
 
-#: Bosssec.class.php:367
+#: Bosssec.class.php:395
 msgid "Boss-Secretary Rule List"
 msgstr ""
 
