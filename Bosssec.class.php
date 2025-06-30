@@ -311,7 +311,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
             $boss = $config['boss_extension'];
             $secretary = $config['secretary_extension'];
             $whitelist_str = $config['whitelist'];
-            $subroutine_context = 'boss-secretary' . $boss;
+            $subroutine_context = 'boss-secretary-' . $boss;
             $ext->splice('ext-local', $boss, 1, new \ext_goto(1, 's', $subroutine_context));            
             $ext->add($subroutine_context, 's', 1, new \ext_noop("Call to Boss {$boss}. Checking CallerID: \${CALLERID(num)}"));            
             $whitelist_array = !empty($whitelist_str) ? preg_split('/[\s,]+|\r\n|\r|\n/', $whitelist_str) : [];
