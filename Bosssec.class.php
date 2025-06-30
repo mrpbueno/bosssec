@@ -85,6 +85,15 @@ class Bosssec extends FreePBX_Helpers implements BMO
             'enabled' => (int) $this->getReq('enabled', 1)
         ];
 
+        if ($action === 'add' || $action === 'edit') {
+            $exclude_id = ($action === 'edit') ? $id : null;
+            if ($this->is_duplicate_boss($data['boss_extension'], $exclude_id)) {
+                $_SESSION['toast_message'] = ['message' => _("The selected boss extension is already in use by another rule."), 'title' => _('Duplicate Boss'), 'level' => 'error'];
+                redirect($redirect_url);
+                return;
+            }
+        }
+
         $success = false;
 
         switch ($action) {
@@ -272,6 +281,28 @@ class Bosssec extends FreePBX_Helpers implements BMO
             freepbx_log(FPBX_LOG_ERROR, _("Error deleting Boss-Secretary rule: ") . $e->getMessage());
             return false;
         }
+    }
+
+    /**
+     * Checks if a boss extension already exists in the database.
+     *
+     * @param string $boss_extension The boss extension to check.
+     * @param int|null $exclude_id   An optional ID to exclude from the check (used for updates).
+     * @return bool True if a duplicate is found, false otherwise.
+     */
+    private function is_duplicate_boss($boss_extension, $exclude_id = null)
+    {
+        $sql = "SELECT id FROM bosssec_config WHERE boss_extension = :boss_extension";
+        if ($exclude_id !== null) {
+            $sql .= " AND id != :exclude_id";
+        }
+        $sth = $this->db->prepare($sql);
+        $sth->bindValue(':boss_extension', $boss_extension);
+        if ($exclude_id !== null) {
+            $sth->bindValue(':exclude_id', $exclude_id, \PDO::PARAM_INT);
+        }
+        $sth->execute();
+        return $sth->fetchColumn() !== false;
     }
 
     /**

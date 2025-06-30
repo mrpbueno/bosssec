@@ -11,7 +11,7 @@
     <database>
         <table name="bosssec_config">
             <field name="id" type="integer" primarykey="true" autoincrement="true"/>
-            <field name="boss_extension" type="string" length="20" notnull="true"/>
+            <field name="boss_extension" type="string" length="20" notnull="true" unique="true"/>
             <field name="boss_name" type="string" length="80" notnull="false"/>
             <field name="secretary_extension" type="string" length="20" notnull="true"/>
             <field name="whitelist" type="text" notnull="false" />
@@ -27,6 +27,7 @@
     <supported>14.0</supported>
     <description>Module to manage the call flow between Boss and Secretary, with a whitelist.</description>
     <changelog>
-        *14.0.1* Initial version of the module.
+        *14.0.2* - Added validation to prevent duplicate boss extensions.
+        *14.0.1* - Initial version of the module.
     </changelog>
 </module>
