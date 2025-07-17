@@ -70,3 +70,5 @@ Important: After saving any changes, the red "Apply Config" button will appear a
 
 ## License
 This project is licensed under the GPLv3 license.
+
+[FreePBX](http://www.freepbx.org/) is a registered trademark of [Sangoma Technologies Inc.](http://www.freepbx.org/copyright.html)
