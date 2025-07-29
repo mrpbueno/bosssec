@@ -345,12 +345,12 @@ class Bosssec extends FreePBX_Helpers implements BMO
             $subroutine_context = 'boss-secretary-' . $boss;
             $ext->splice('ext-local', $boss, 1, new \ext_goto(1, 's', $subroutine_context));            
             $ext->add($subroutine_context, 's', 1, new \ext_noop("Call to Boss {$boss}. Checking CallerID: \${CALLERID(num)}"));            
-            $whitelist_array = !empty($whitelist_str) ? preg_split('/[\s,]+|\r\n|\r|\n/', $whitelist_str) : [];
+            $whitelist_array = array_filter(array_map('trim', preg_split('/[\s,]+|\r\n|\r|\n/', $whitelist_str)));
             $whitelist_array[] = $secretary;
-            $whitelist_regex = implode('|', array_filter(array_unique($whitelist_array)));            
+            $whitelist_regex = implode('|', array_unique($whitelist_array));            
             if (!empty($whitelist_regex)) {
                 $ext->add($subroutine_context, 's', '', new \ext_setvar('CS_RESULT', "\${REGEX(\"{$whitelist_regex}\",\"\${CALLERID(num)}\")}"));
-                $ext->add($subroutine_context, 's', '', new \ext_gotoif('$[\${CS_RESULT} = 1]', 'route-to-boss', 'route-to-secretary'));
+                $ext->add($subroutine_context, 's', '', new \ext_gotoif('$["${CS_RESULT}" = "1"]', 'route-to-boss', 'route-to-secretary'));
             } else {
                 $ext->add($subroutine_context, 's', '', new \ext_goto('route-to-secretary'));
             }            
