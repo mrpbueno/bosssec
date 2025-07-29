@@ -102,21 +102,21 @@ class Bosssec extends FreePBX_Helpers implements BMO
                     needreload();
                     $success = true;
                     $_SESSION['toast_message'] = ['message' => _('Rule added successfully!'), 'title' => _('Success'), 'level' => 'success'];
-                }                
+                }
                 break;
             case 'edit':
                 if ($this->update_config($id, $data)) {
                     needreload();
                     $success = true;
                     $_SESSION['toast_message'] = ['message' => _('Rule successfully updated!'), 'title' => _('Success'), 'level' => 'success'];
-                }                
+                }
                 break;
             case 'delete':
                 if ($this->delete_config($id)) {
                     needreload();
                     $success = true;
                     $_SESSION['toast_message'] = ['message' => _('Rule successfully deleted!'), 'title' => _('Success'), 'level' => 'success'];
-                }                
+                }
                 break;
         }
 
@@ -179,7 +179,6 @@ class Bosssec extends FreePBX_Helpers implements BMO
                     'reset' => ['name' => 'reset', 'id' => 'reset', 'value' => _("Reset"),],
                     'submit' => ['name' => 'submit', 'id' => 'submit', 'value' => _("Submit"),],
                 ];
-
                 if (!isset($request['id']) || trim($request['id']) == '') {
                     unset($buttons['delete']);
                 }
@@ -189,7 +188,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
                 break;
         }
         return $buttons;
-    }    
+    }
 
     /**
      * Fetches all Boss-Secretary rule configurations from the database.
@@ -343,19 +342,19 @@ class Bosssec extends FreePBX_Helpers implements BMO
             $secretary = $config['secretary_extension'];
             $whitelist_str = $config['whitelist'];
             $subroutine_context = 'boss-secretary-' . $boss;
-            $ext->splice('ext-local', $boss, 1, new \ext_goto(1, 's', $subroutine_context));            
-            $ext->add($subroutine_context, 's', 1, new \ext_noop("Call to Boss {$boss}. Checking CallerID: \${CALLERID(num)}"));            
+            $ext->splice('ext-local', $boss, 1, new \ext_goto(1, 's', $subroutine_context));
+            $ext->add($subroutine_context, 's', 1, new \ext_noop("Call to Boss {$boss}. Checking CallerID: \${CALLERID(num)}"));
             $whitelist_array = array_filter(array_map('trim', preg_split('/[\s,]+|\r\n|\r|\n/', $whitelist_str)));
             $whitelist_array[] = $secretary;
-            $whitelist_regex = implode('|', array_unique($whitelist_array));            
+            $whitelist_regex = implode('|', array_unique($whitelist_array));
             if (!empty($whitelist_regex)) {
                 $ext->add($subroutine_context, 's', '', new \ext_setvar('CS_RESULT', "\${REGEX(\"{$whitelist_regex}\",\"\${CALLERID(num)}\")}"));
                 $ext->add($subroutine_context, 's', '', new \ext_gotoif('$["${CS_RESULT}" = "1"]', 'route-to-boss', 'route-to-secretary'));
             } else {
                 $ext->add($subroutine_context, 's', '', new \ext_goto('route-to-secretary'));
-            }            
-            $ext->add($subroutine_context, 's', 'route-to-boss', new \ext_noop("Whitelist OK. Returning call to ext-local,{$boss},3"));            
-            $ext->add($subroutine_context, 's', '', new \ext_goto(3, $boss, 'ext-local'));            
+            }
+            $ext->add($subroutine_context, 's', 'route-to-boss', new \ext_noop("Whitelist OK. Returning call to ext-local,{$boss},3"));
+            $ext->add($subroutine_context, 's', '', new \ext_goto(3, $boss, 'ext-local'));
             $ext->add($subroutine_context, 's', 'route-to-secretary', new \ext_noop("Forwarding call to ext-local,{$secretary},1"));
             $ext->add($subroutine_context, 's', '', new \ext_goto(1, $secretary, 'ext-local'));
         }
@@ -373,10 +372,8 @@ class Bosssec extends FreePBX_Helpers implements BMO
     {
         $view = isset($_GET['view']) ? $_GET['view'] : 'grid';
         $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
-
         $content = '';
         $subhead = '';
-
         if ($view === 'form') {
             $vars = [];
             if ($id) {
@@ -384,10 +381,10 @@ class Bosssec extends FreePBX_Helpers implements BMO
                 $vars = $this->get_config($id);
             } else {
                 $subhead = _('Add New Boss-Secretary Rule');
-            }            
-            if (function_exists('core_devices_list')) {                
+            }
+            if (function_exists('core_devices_list')) {
                 $vars['devices'] = core_devices_list();
-            } else {                
+            } else {
                 $vars['devices'] = [];
             }
             $content = load_view(__DIR__ . '/views/form.php', $vars);

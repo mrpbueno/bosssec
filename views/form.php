@@ -117,7 +117,7 @@
     </div>
     </form>
 
-<script>    
+<script>
     $(document).ready(function() {
         $('#boss_extension').select2();
         $('#secretary_extension').select2();

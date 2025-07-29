@@ -5,7 +5,7 @@
                 class="btn btn-default"
                 onclick="location.href='?display=bosssec&view=form';">
             <i class="fa fa-plus"></i> <?php echo _("Add"); ?>
-        </button>        
+        </button>
     </div>
 </div>
 
@@ -18,7 +18,7 @@
        data-search="true"
        data-toolbar="#buttons-toolbar">
     <thead>
-        <tr>            
+        <tr>
             <th data-field="boss_name"><?php echo _("Boss's Name")?></th>
             <th data-field="boss_extension"><?php echo _("Boss's Extension")?></th>
             <th data-field="secretary_extension"><?php echo _("Secretary's Extension")?></th>
@@ -51,14 +51,14 @@ function statusFormatter(value, row) {
     }
 }
 
-(function($) {        
+(function($) {
     $(function() {
         var gridContainer = $('#grid-container');
-        var toastDataJson = gridContainer.data('toast');            
+        var toastDataJson = gridContainer.data('toast');
         if (toastDataJson) {
             fpbxToast(toastDataJson.message, toastDataJson.title, toastDataJson.level);
             gridContainer.removeAttr('data-toast');
-        }            
+        }
     });
 })(jQuery);
 </script>
