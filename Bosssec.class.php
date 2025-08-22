@@ -87,7 +87,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
 
         if ($action === 'add' || $action === 'edit') {
             $exclude_id = ($action === 'edit') ? $id : null;
-            if ($this->is_duplicate_boss($data['boss_extension'], $exclude_id)) {
+            if ($this->isDuplicateBoss($data['boss_extension'], $exclude_id)) {
                 $_SESSION['toast_message'] = ['message' => _("The selected boss extension is already in use by another rule."), 'title' => _('Duplicate Boss'), 'level' => 'error'];
                 redirect($redirect_url);
                 return;
@@ -98,21 +98,21 @@ class Bosssec extends FreePBX_Helpers implements BMO
 
         switch ($action) {
             case 'add':
-                if ($this->add_config($data)) {
+                if ($this->addConfig($data)) {
                     needreload();
                     $success = true;
                     $_SESSION['toast_message'] = ['message' => _('Rule added successfully!'), 'title' => _('Success'), 'level' => 'success'];
                 }
                 break;
             case 'edit':
-                if ($this->update_config($id, $data)) {
+                if ($this->updateConfig($id, $data)) {
                     needreload();
                     $success = true;
                     $_SESSION['toast_message'] = ['message' => _('Rule successfully updated!'), 'title' => _('Success'), 'level' => 'success'];
                 }
                 break;
             case 'delete':
-                if ($this->delete_config($id)) {
+                if ($this->deleteConfig($id)) {
                     needreload();
                     $success = true;
                     $_SESSION['toast_message'] = ['message' => _('Rule successfully deleted!'), 'title' => _('Success'), 'level' => 'success'];
@@ -158,7 +158,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
         if ($_REQUEST['jdata'] != 'grid') {
             return false;
         }
-        return $this->get_configs();
+        return $this->getConfigs();
     }
 
     /**
@@ -195,7 +195,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
      *
      * @return array An associative array with all the rules.
      */
-    public function get_configs() 
+    public function getConfigs() 
     {
         $sql = "SELECT id, boss_name, boss_extension, secretary_extension, enabled FROM bosssec_config";
         return $this->db->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
@@ -207,7 +207,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
      * @param int $id The ID of the rule to fetch.
      * @return array|false An associative array with the rule data or false if not found.
      */
-    public function get_config($id) 
+    public function getConfig($id) 
     {
         $sql = "SELECT * FROM bosssec_config WHERE id = ?";
         $sth = $this->db->prepare($sql);
@@ -221,7 +221,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
      * @param array $data The data for the new rule to be inserted.
      * @return bool True on success, false on error.
      */
-    public function add_config($data) 
+    public function addConfig($data) 
     {
         try {
             $sql = "INSERT INTO bosssec_config (boss_name, boss_extension, secretary_extension, whitelist, enabled) VALUES (:boss_name, :boss_extension, :secretary_extension, :whitelist, :enabled)";
@@ -245,7 +245,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
      * @param array $data The new data for the rule.
      * @return bool True on success, false on error.
      */
-    public function update_config($id, $data) 
+    public function updateConfig($id, $data) 
     {
         try {
             $sql = "UPDATE bosssec_config SET boss_name = :boss_name, boss_extension = :boss_extension, secretary_extension = :secretary_extension, whitelist = :whitelist, enabled = :enabled WHERE id = :id";
@@ -269,7 +269,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
      * @param int $id The ID of the rule to be deleted.
      * @return bool True on success, false on error.
      */
-    public function delete_config($id) 
+    public function deleteConfig($id) 
     {
         try {
             $sql = "DELETE FROM bosssec_config WHERE id = :id";
@@ -289,7 +289,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
      * @param int|null $exclude_id   An optional ID to exclude from the check (used for updates).
      * @return bool True if a duplicate is found, false otherwise.
      */
-    private function is_duplicate_boss($boss_extension, $exclude_id = null)
+    private function isDuplicateBoss($boss_extension, $exclude_id = null)
     {
         $sql = "SELECT id FROM bosssec_config WHERE boss_extension = :boss_extension";
         if ($exclude_id !== null) {
@@ -378,7 +378,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
             $vars = [];
             if ($id) {
                 $subhead = _('Edit Boss-Secretary Rule');
-                $vars = $this->get_config($id);
+                $vars = $this->getConfig($id);
             } else {
                 $subhead = _('Add New Boss-Secretary Rule');
             }
