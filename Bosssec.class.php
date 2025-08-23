@@ -98,21 +98,21 @@ class Bosssec extends FreePBX_Helpers implements BMO
 
         switch ($action) {
             case 'add':
-                if ($this->addConfig($data)) {
+                if ($this->addBossSecConfig($data)) {
                     needreload();
                     $success = true;
                     $_SESSION['toast_message'] = ['message' => _('Rule added successfully!'), 'title' => _('Success'), 'level' => 'success'];
                 }
                 break;
             case 'edit':
-                if ($this->updateConfig($id, $data)) {
+                if ($this->updateBossSecConfig($id, $data)) {
                     needreload();
                     $success = true;
                     $_SESSION['toast_message'] = ['message' => _('Rule successfully updated!'), 'title' => _('Success'), 'level' => 'success'];
                 }
                 break;
             case 'delete':
-                if ($this->deleteConfig($id)) {
+                if ($this->deleteBossSecConfig($id)) {
                     needreload();
                     $success = true;
                     $_SESSION['toast_message'] = ['message' => _('Rule successfully deleted!'), 'title' => _('Success'), 'level' => 'success'];
@@ -158,7 +158,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
         if ($_REQUEST['jdata'] != 'grid') {
             return false;
         }
-        return $this->getConfigs();
+        return $this->getBossSecConfigs();
     }
 
     /**
@@ -195,7 +195,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
      *
      * @return array An associative array with all the rules.
      */
-    public function getConfigs() 
+    public function getBossSecConfigs() 
     {
         $sql = "SELECT id, boss_name, boss_extension, secretary_extension, enabled FROM bosssec_config";
         return $this->db->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
@@ -207,7 +207,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
      * @param int $id The ID of the rule to fetch.
      * @return array|false An associative array with the rule data or false if not found.
      */
-    public function getConfig($id) 
+    public function getBossSecConfig($id) 
     {
         $sql = "SELECT * FROM bosssec_config WHERE id = ?";
         $sth = $this->db->prepare($sql);
@@ -221,7 +221,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
      * @param array $data The data for the new rule to be inserted.
      * @return bool True on success, false on error.
      */
-    public function addConfig($data) 
+    public function addBossSecConfig($data) 
     {
         try {
             $sql = "INSERT INTO bosssec_config (boss_name, boss_extension, secretary_extension, whitelist, enabled) VALUES (:boss_name, :boss_extension, :secretary_extension, :whitelist, :enabled)";
@@ -245,7 +245,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
      * @param array $data The new data for the rule.
      * @return bool True on success, false on error.
      */
-    public function updateConfig($id, $data) 
+    public function updateBossSecConfig($id, $data) 
     {
         try {
             $sql = "UPDATE bosssec_config SET boss_name = :boss_name, boss_extension = :boss_extension, secretary_extension = :secretary_extension, whitelist = :whitelist, enabled = :enabled WHERE id = :id";
@@ -269,7 +269,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
      * @param int $id The ID of the rule to be deleted.
      * @return bool True on success, false on error.
      */
-    public function deleteConfig($id) 
+    public function deleteBossSecConfig($id) 
     {
         try {
             $sql = "DELETE FROM bosssec_config WHERE id = :id";
@@ -378,7 +378,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
             $vars = [];
             if ($id) {
                 $subhead = _('Edit Boss-Secretary Rule');
-                $vars = $this->getConfig($id);
+                $vars = $this->getBossSecConfig($id);
             } else {
                 $subhead = _('Add New Boss-Secretary Rule');
             }
