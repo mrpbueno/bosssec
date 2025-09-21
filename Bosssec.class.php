@@ -72,17 +72,35 @@ class Bosssec extends FreePBX_Helpers implements BMO
     {
         $action = $this->getReq('action', '');
         $id = (int) $this->getReq('id', 0);
+        $boss_ext = $this->getReq('boss_extension');
+        $sec_ext = $this->getReq('secretary_extension');
+        $boss_name = $this->getReq('boss_name');
+        $enabled = (int) $this->getReq('enabled', 1);
+        $whitelist_raw = $this->getReq('whitelist');
+        $whitelist_sanitized = preg_replace('/[^\d\s,\r\n]/', '', $whitelist_raw);
         $redirect_url = 'config.php?display=' . $page;
         if (empty($action)) {
             return;
         }
 
+        if (!ctype_digit($boss_ext) || !ctype_digit($sec_ext)) {
+        $_SESSION['toast_message'] = ['message' => _('Invalid extension format.'), 'title' => _('Error'), 'level' => 'error'];
+        redirect('config.php?display=' . $page);
+        return;
+        }
+
+        if (empty($boss_name)) {
+            $_SESSION['toast_message'] = ['message' => _("Boss's name cannot be empty."), 'title' => _('Error'), 'level' => 'error'];
+            redirect('config.php?display=' . $page);
+            return;
+        }
+
         $data = [
-            'boss_name' => $this->getReq('boss_name'),
-            'boss_extension' => $this->getReq('boss_extension'),
-            'secretary_extension' => $this->getReq('secretary_extension'),
-            'whitelist' => $this->getReq('whitelist'),
-            'enabled' => (int) $this->getReq('enabled', 1)
+            'boss_name' => $boss_name,
+            'boss_extension' => $boss_ext,
+            'secretary_extension' => $sec_ext,
+            'whitelist' => $whitelist_sanitized,
+            'enabled' => $enabled
         ];
 
         if ($action === 'add' || $action === 'edit') {
