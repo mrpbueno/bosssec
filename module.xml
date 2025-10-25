@@ -2,7 +2,7 @@
     <rawname>bosssec</rawname>
     <repo>unsupported</repo>
     <name>Boss-Secretary</name>
-    <version>14.0.5</version>
+    <version>14.0.6</version>
     <category>Applications</category>
     <publisher>mrpbueno</publisher>
     <info>https://github.com/mrpbueno/bosssec</info>
@@ -30,6 +30,7 @@
     <supported>14.0</supported>
     <description>Module to manage the call flow between Boss and Secretary, with a whitelist.</description>
     <changelog>
+        *14.0.6* - Added backup and restore methods
         *14.0.5* - Harden form submission handling
         *14.0.4* - Replaced unsupported "unique" column option with a proper unique index for compatibility with FreePBX 17. Backward compatibility with FreePBX 14 confirmed.
         *14.0.3* - Resolved an issue in the generated dialplan where the ${CS_RESULT} variable was incorrectly escaped in the GotoIf condition.
