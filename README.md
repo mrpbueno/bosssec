@@ -32,9 +32,9 @@ If the number is not allowed, the call is directed to the standard flow of the s
 This approach ensures that the module only manages the initial diversion, leaving all other call processing (including Follow Me, voicemail, etc.) to FreePBX itself.
 
 ## Prerequisites
-FreePBX 14 or higher.
+FreePBX 17 or higher.
 
-PHP 5.6 or higher.
+PHP 8 or higher.
 
 ## Installation
 Download the latest version of the module from https://github.com/mrpbueno/bosssec/releases
