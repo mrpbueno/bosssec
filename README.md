@@ -1,4 +1,4 @@
-# Boss-Secretary Module for FreePBX
+# Boss-Secretary
 A module for FreePBX 17 that implements an intelligent "Boss-Secretary" call flow. Calls intended for a "Boss" are first intercepted and directed to a "Secretary," who acts as a gatekeeper, with the flexibility of a whitelist for direct access.
 
 This project was developed following best practices for module creation in FreePBX, using the BMO (Big Module Object) architecture and being as non-invasive as possible.
