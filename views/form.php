@@ -84,13 +84,13 @@
                             <i class="fa fa-question-circle fpbx-help-icon" data-for="whitelist"></i>
                         </div>
                         <div class="col-md-9">
-                            <textarea class="form-control" id="whitelist" name="whitelist" rows="5"><?php echo isset($whitelist) ? htmlspecialchars($whitelist, ENT_QUOTES, 'UTF-8') : '' ?></textarea>
+                            <textarea class="form-control" id="whitelist" name="whitelist" rows="5" maxlength="500"><?php echo isset($whitelist) ? htmlspecialchars($whitelist, ENT_QUOTES, 'UTF-8') : '' ?></textarea>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row"><div class="col-md-12"><span id="whitelist-help" class="help-block fpbx-help-block"><?php echo _("Numbers that can call the boss directly. Add one number per line.")?></span></div></div>
+        <div class="row"><div class="col-md-12"><span id="whitelist-help" class="help-block fpbx-help-block"><?php echo _("Max 500 characters. Numbers that can call the boss directly. Add one number per line.")?></span></div></div>
     </div>
     <div class="element-container">
         <div class="row">

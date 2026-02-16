@@ -78,6 +78,17 @@ class Bosssec extends FreePBX_Helpers implements BMO
         $enabled = (int) $this->getReq('enabled', 1);
         $whitelist_raw = $this->getReq('whitelist');
         $whitelist_sanitized = preg_replace('/[^\d\s,\r\n]/', '', $whitelist_raw);
+
+        if (strlen($whitelist_sanitized) > 500) {
+            $_SESSION['toast_message'] = [
+                'message' => _('The whitelist is too long. Please limit it to 500 characters.'),
+                'title' => _('Validation Error'),
+                'level' => 'error'
+            ];
+            redirect('config.php?display=' . $page);
+            return;
+        }
+
         $redirect_url = 'config.php?display=' . $page;
         if (empty($action)) {
             return;
@@ -369,7 +380,7 @@ class Bosssec extends FreePBX_Helpers implements BMO
             $whitelist_regex = implode('|', $list);
 
             if (!empty($whitelist_regex)) {
-                $ext->add($subroutine_context, 's', '', new \ext_setvar('CS_RESULT', "\${REGEX(\"^({$whitelist_regex})$\",\${CALLERID(num)})}"));
+                $ext->add($subroutine_context, 's', '', new \ext_setvar('CS_RESULT', "\${REGEX(\"^({$whitelist_regex})$\" \${CALLERID(num)})}"));
                 $ext->add($subroutine_context, 's', '', new \ext_gotoif('$["${CS_RESULT}" = "1"]', 'route-to-boss', 'route-to-secretary'));
             } else {
                 $ext->add($subroutine_context, 's', '', new \ext_goto('route-to-secretary'));
