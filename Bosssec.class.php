@@ -79,9 +79,9 @@ class Bosssec extends FreePBX_Helpers implements BMO
         $whitelist_raw = $this->getReq('whitelist');
         $whitelist_sanitized = preg_replace('/[^\d\s,\r\n]/', '', $whitelist_raw);
 
-        if (strlen($whitelist_sanitized) > 500) {
+        if (strlen($whitelist_sanitized) > 250) {
             $_SESSION['toast_message'] = [
-                'message' => _('The whitelist is too long. Please limit it to 500 characters.'),
+                'message' => _('The whitelist is too long. Please limit it to 250 characters.'),
                 'title' => _('Validation Error'),
                 'level' => 'error'
             ];

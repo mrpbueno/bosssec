@@ -30,6 +30,7 @@
     <supported>17.0</supported>
     <description>Module to manage the call flow between Boss and Secretary, with a whitelist.</description>
     <changelog>
+        *17.0.1* - Security fix: Prevent dialplan injection in whitelist regex. Fix: Correct regex syntax for CallerID matching. Improvement: Added input validation limits.
         *17.0.0* - Migrated to FreePBX 17. Implemented new Backup/Restore classes with V14 legacy restore support.
     </changelog>
 </module>
