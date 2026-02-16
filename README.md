@@ -1,7 +1,7 @@
-# Boss-Secretary Module for FreePBX
-A module for FreePBX 17 that implements an intelligent "Boss-Secretary" call flow. Calls intended for a "Boss" are first intercepted and directed to a "Secretary," who acts as a gatekeeper, with the flexibility of a whitelist for direct access.
+# Boss-Secretary Module for FreePBX®
+A module for FreePBX 17® that implements an intelligent "Boss-Secretary" call flow. Calls intended for a "Boss" are first intercepted and directed to a "Secretary," who acts as a gatekeeper, with the flexibility of a whitelist for direct access.
 
-This project was developed following best practices for module creation in FreePBX, using the BMO (Big Module Object) architecture and being as non-invasive as possible.
+This project was developed following best practices for module creation in FreePBX®, using the BMO (Big Module Object) architecture and being as non-invasive as possible.
 
 ## Key Features
 Intelligent Routing: Forwards calls intended for a "Boss" extension to a designated "Secretary" extension.
@@ -10,7 +10,7 @@ Whitelist for Direct Access: Configure a list of numbers (internal or external) 
 
 Multi-Pair Management: The interface allows for the configuration of multiple Boss-Secretary rules, each with its own whitelist.
 
-Integrated Graphical Interface: All settings are managed through a new page in the "Applications" menu of FreePBX, without the need to manually edit configuration files.
+Integrated Graphical Interface: All settings are managed through a new page in the "Applications" menu of FreePBX®, without the need to manually edit configuration files.
 
 User-Friendly Extension Selection: Uses the Select2 library to facilitate searching and selecting the boss's and secretary's extensions, minimizing errors.
 
@@ -19,22 +19,22 @@ Feedback Notifications: Displays success or error messages ("toast notifications
 Secure Dialplan Integration: The module safely injects its logic into the Asterisk Dialplan without overwriting existing contexts, ensuring compatibility and stability.
 
 ## How It Works
-The module uses a Dialplan Hook to integrate with FreePBX. Instead of creating contexts that could conflict with the standard logic, it uses the $ext->splice() function to inject a Goto command at the beginning of the ext-local context for the boss's extension.
+The module uses a Dialplan Hook to integrate with FreePBX®. Instead of creating contexts that could conflict with the standard logic, it uses the $ext->splice() function to inject a Goto command at the beginning of the ext-local context for the boss's extension.
 
 This diverts the call to a custom subroutine that:
 
 Checks the caller's CallerID against the whitelist.
 
-If the number is allowed, the call is returned to the standard FreePBX flow (ext-local), at a priority that prevents loops, to be completed normally.
+If the number is allowed, the call is returned to the standard FreePBX® flow (ext-local), at a priority that prevents loops, to be completed normally.
 
 If the number is not allowed, the call is directed to the standard flow of the secretary's extension.
 
-This approach ensures that the module only manages the initial diversion, leaving all other call processing (including Follow Me, voicemail, etc.) to FreePBX itself.
+This approach ensures that the module only manages the initial diversion, leaving all other call processing (including Follow Me, voicemail, etc.) to FreePBX® itself.
 
 ## Prerequisites
-FreePBX 17 or higher.
+FreePBX® 17
 
-PHP 8 or higher.
+PHP 8.2
 
 ## Installation
 Download the latest version of the module from https://github.com/mrpbueno/bosssec/releases
@@ -46,7 +46,7 @@ Click on Upload Modules and upload the module's zip file.
 Return to the module list and install the Boss-Secretary module.
 
 ## Usage and Configuration
-After installation, the module will be available in the FreePBX menu.
+After installation, the module will be available in the FreePBX® menu.
 
 Navigate to Applications > Boss-Secretary.
 
@@ -71,4 +71,4 @@ Important: After saving any changes, the red "Apply Config" button will appear a
 ## License
 This project is licensed under the GPLv3 license.
 
-[FreePBX](http://www.freepbx.org/) is a registered trademark of [Sangoma Technologies Inc.](http://www.freepbx.org/copyright.html)
+[FreePBX®](http://www.freepbx.org/) is a registered trademark of [Sangoma Technologies Inc.](http://www.freepbx.org/copyright.html)
