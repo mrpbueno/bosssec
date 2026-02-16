@@ -31,6 +31,16 @@ If the number is not allowed, the call is directed to the standard flow of the s
 
 This approach ensures that the module only manages the initial diversion, leaving all other call processing (including Follow Me, voicemail, etc.) to FreePBX® itself.
 
+## Limitations
+
+### Whitelist Configuration
+* **Character Limit:** The whitelist is limited to **250 characters**. This helps maintain Asterisk dialplan performance.  
+* **Format:** Only enter numbers. Spaces and commas can be used as separators.  
+* **Automatic Normalization:** Do **not** enter the `+` sign (E.164 format). The module automatically strips the `+` from incoming calls (e.g., `+55119999` becomes `55119999`) to ensure they match your whitelist entries correctly.  
+
+### Security
+* **Exact Match:** The module uses strict verification. A whitelist entry of `100` matches exactly extension `100`. It will NOT match `1001` or `1002`.  
+
 ## Prerequisites
 FreePBX® 17
 
