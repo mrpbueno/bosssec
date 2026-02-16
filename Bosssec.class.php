@@ -380,7 +380,8 @@ class Bosssec extends FreePBX_Helpers implements BMO
             $whitelist_regex = implode('|', $list);
 
             if (!empty($whitelist_regex)) {
-                $ext->add($subroutine_context, 's', '', new \ext_setvar('CS_RESULT', "\${REGEX(\"^({$whitelist_regex})$\" \${CALLERID(num)})}"));
+                $ext->add($subroutine_context, 's', '', new \ext_setvar('NORMALIZED_CALLERID', "\${FILTER(0-9,\${CALLERID(num)})}"));
+                $ext->add($subroutine_context, 's', '', new \ext_setvar('CS_RESULT', "\${REGEX(\"^({$whitelist_regex})$\" \${NORMALIZED_CALLERID})}"));
                 $ext->add($subroutine_context, 's', '', new \ext_gotoif('$["${CS_RESULT}" = "1"]', 'route-to-boss', 'route-to-secretary'));
             } else {
                 $ext->add($subroutine_context, 's', '', new \ext_goto('route-to-secretary'));
