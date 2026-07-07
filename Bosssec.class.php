@@ -72,76 +72,78 @@ class Bosssec extends FreePBX_Helpers implements BMO
     {
         $action = $this->getReq('action', '');
         $id = (int) $this->getReq('id', 0);
-        $boss_ext = preg_replace('/[^\d]/', '', (string)$this->getReq('boss_extension'));
-        $sec_ext = preg_replace('/[^\d]/', '', (string)$this->getReq('secretary_extension'));
-        $boss_name = htmlspecialchars((string)$this->getReq('boss_name'), ENT_QUOTES, 'UTF-8');
-        $enabled = (int) $this->getReq('enabled', 1);
-        $whitelist_raw = $this->getReq('whitelist');
-        $whitelist_sanitized = preg_replace('/[^\d\s,\r\n]/', '', $whitelist_raw);
-
-        if (strlen($whitelist_sanitized) > 250) {
-            $_SESSION['toast_message'] = [
-                'message' => _('The whitelist is too long. Please limit it to 250 characters.'),
-                'title' => _('Validation Error'),
-                'level' => 'error'
-            ];
-            redirect('config.php?display=' . $page);
-            return;
-        }
-
         $redirect_url = 'config.php?display=' . $page;
+
         if (empty($action)) {
             return;
         }
 
-        if (!ctype_digit($boss_ext) || !ctype_digit($sec_ext)) {
-        $_SESSION['toast_message'] = ['message' => _('Invalid extension format.'), 'title' => _('Error'), 'level' => 'error'];
-        redirect('config.php?display=' . $page);
-        return;
-        }
-
-        if (empty($boss_name)) {
-            $_SESSION['toast_message'] = ['message' => _("Boss's name cannot be empty."), 'title' => _('Error'), 'level' => 'error'];
-            redirect('config.php?display=' . $page);
-            return;
-        }
-
-        $data = [
-            'boss_name' => $boss_name,
-            'boss_extension' => $boss_ext,
-            'secretary_extension' => $sec_ext,
-            'whitelist' => $whitelist_sanitized,
-            'enabled' => $enabled
-        ];
-
         if ($action === 'add' || $action === 'edit') {
+            $boss_ext = preg_replace('/[^\d]/', '', (string)$this->getReq('boss_extension'));
+            $sec_ext = preg_replace('/[^\d]/', '', (string)$this->getReq('secretary_extension'));
+            $boss_name = htmlspecialchars((string)$this->getReq('boss_name'), ENT_QUOTES, 'UTF-8');
+            $enabled = (int) $this->getReq('enabled', 1);
+            
+            $whitelist_raw = $this->getReq('whitelist');
+            $whitelist_sanitized = preg_replace('/[^\d\s,\r\n]/', '', $whitelist_raw);
+
+            if (!ctype_digit($boss_ext) || !ctype_digit($sec_ext)) {
+                $_SESSION['toast_message'] = ['message' => _('Invalid extension format.'), 'title' => _('Error'), 'level' => 'error'];
+                redirect($redirect_url);
+                return;
+            }
+
+            if (empty($boss_name)) {
+                $_SESSION['toast_message'] = ['message' => _("Boss's name cannot be empty."), 'title' => _('Error'), 'level' => 'error'];
+                redirect($redirect_url);
+                return;
+            }
+
+            if (strlen($whitelist_sanitized) > 250) {
+                $_SESSION['toast_message'] = [
+                    'message' => _('The whitelist is too long. Please limit it to 250 characters.'),
+                    'title' => _('Validation Error'),
+                    'level' => 'error'
+                ];
+                redirect($redirect_url);
+                return;
+            }
+
             $exclude_id = ($action === 'edit') ? $id : null;
-            if ($this->isDuplicateBoss($data['boss_extension'], $exclude_id)) {
+            if ($this->isDuplicateBoss($boss_ext, $exclude_id)) {
                 $_SESSION['toast_message'] = ['message' => _("The selected boss extension is already in use by another rule."), 'title' => _('Duplicate Boss'), 'level' => 'error'];
                 redirect($redirect_url);
                 return;
             }
+
+            $data = [
+                'boss_name' => $boss_name,
+                'boss_extension' => $boss_ext,
+                'secretary_extension' => $sec_ext,
+                'whitelist' => $whitelist_sanitized,
+                'enabled' => $enabled
+            ];
         }
 
         $success = false;
 
         switch ($action) {
             case 'add':
-                if ($this->addBossSecConfig($data)) {
+                if (isset($data) && $this->addBossSecConfig($data)) {
                     needreload();
                     $success = true;
                     $_SESSION['toast_message'] = ['message' => _('Rule added successfully!'), 'title' => _('Success'), 'level' => 'success'];
                 }
                 break;
             case 'edit':
-                if ($this->updateBossSecConfig($id, $data)) {
+                if (isset($data) && $this->updateBossSecConfig($id, $data)) {
                     needreload();
                     $success = true;
                     $_SESSION['toast_message'] = ['message' => _('Rule successfully updated!'), 'title' => _('Success'), 'level' => 'success'];
                 }
                 break;
             case 'delete':
-                if ($this->deleteBossSecConfig($id)) {
+                if ($id > 0 && $this->deleteBossSecConfig($id)) {
                     needreload();
                     $success = true;
                     $_SESSION['toast_message'] = ['message' => _('Rule successfully deleted!'), 'title' => _('Success'), 'level' => 'success'];
